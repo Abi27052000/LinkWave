@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:linkwave/Screen/moile_chat_screen.dart';
+import 'package:linkwave/Screen/mobile_chat_screen.dart';
+
 import 'package:linkwave/info.dart';
 
 class ContactsList extends StatelessWidget {
