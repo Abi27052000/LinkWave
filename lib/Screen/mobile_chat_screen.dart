@@ -36,8 +36,9 @@ class MobileChatScreen extends StatelessWidget {
             ),
             TextField(
               decoration: InputDecoration(
+
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: Colors.grey,
                 prefixIcon:const  Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 20,
@@ -56,6 +57,7 @@ class MobileChatScreen extends StatelessWidget {
                     ),
                     ),
                     hintText: 'Enter the message.',
+                    
                     border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide:const BorderSide(
