@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "704918862356",
+    "project_id": "linkwave-81074",
+    "storage_bucket": "linkwave-81074.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704918862356:android:eaa487895d7006ff8c8501",
+        "android_client_info": {
+          "package_name": "com.abinash27052000.linkwave"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU--KKQ1cXdtoKDKr9yxPdXXE01os9F7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

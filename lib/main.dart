@@ -1,9 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:linkwave/Screen/mobile_screen_layout.dart';
 import 'package:linkwave/Screen/web_screen_layout.dart';
+import 'package:linkwave/features/landing/my_landing_screen.dart';
+import 'package:linkwave/features/landing/screens/landing_screen.dart';
+import 'package:linkwave/firebase_options.dart';
 import 'package:linkwave/responsive/responsive_layout.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(const MyApp());
 }
 
@@ -19,7 +27,7 @@ class MyApp extends StatelessWidget {
         
       ),
       title: 'Link Wave',
-      home:const ResponsiveLayout(mobileScreenLayout: MobileScreenLayout(), webScreenLayout: WebScreenLayout()),
+      home:const MyLandingScreen(),
       
         
       );
