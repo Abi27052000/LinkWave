@@ -1,11 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:linkwave/Screen/mobile_screen_layout.dart';
-import 'package:linkwave/Screen/web_screen_layout.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+//import 'package:linkwave/Screen/mobile_screen_layout.dart';
+//import 'package:linkwave/Screen/web_screen_layout.dart';
 import 'package:linkwave/features/landing/my_landing_screen.dart';
-import 'package:linkwave/features/landing/screens/landing_screen.dart';
+//import 'package:linkwave/features/landing/screens/landing_screen.dart';
 import 'package:linkwave/firebase_options.dart';
-import 'package:linkwave/responsive/responsive_layout.dart';
+//import 'package:linkwave/responsive/responsive_layout.dart';
 import 'package:linkwave/router.dart';
 
 void main() async {
@@ -13,7 +14,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

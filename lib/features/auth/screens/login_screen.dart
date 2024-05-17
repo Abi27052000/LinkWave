@@ -1,16 +1,19 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:linkwave/common/utills/utills.dart';
 import 'package:linkwave/common/widgets/custom_button.dart';
+import 'package:linkwave/features/auth/controller/auth_controller.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   static const routeName = '/login-screen';
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final phoneController = TextEditingController();
   Country? country;
 
@@ -32,6 +35,17 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       },
     );
+  }
+
+  void sendPhoneNumber() {
+    String phoneNumber = phoneController.text.trim();
+    if (country != null && phoneNumber.isNotEmpty) {
+      ref
+          .read(authControllerProvider)
+          .signInWithPhone(context, '+${country!.phoneCode}$phoneNumber');
+    } else {
+      showSnackBar(context: context, content: 'Fill all the fields');
+    }
   }
 
   @override
@@ -78,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
               width: 90,
               child: CustomButton(
                 text: 'Next',
-                onPressed: () {},
+                onPressed: sendPhoneNumber,
               ),
             )
           ],
