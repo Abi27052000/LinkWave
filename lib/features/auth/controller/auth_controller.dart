@@ -5,10 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:linkwave/features/auth/repositary/auth_repositary.dart';
+import 'package:linkwave/models/user_models.dart';
 
 final authControllerProvider = Provider((ref) {
   final authRepositary = ref.watch(authRepositaryProvider);
   return AuthController(authRepositary: authRepositary, ref: ref);
+});
+
+final userDataAuthProvider = FutureProvider((ref) {
+  final authController = ref.watch(authControllerProvider);
+  return authController.getUserData();
 });
 
 class AuthController {
@@ -18,6 +24,11 @@ class AuthController {
     required this.authRepositary,
     required this.ref,
   });
+
+  Future<UserModel?> getUserData() async {
+    UserModel? user = await authRepositary.getCurrentUserData();
+    return user;
+  }
 
   void signInWithPhone(BuildContext context, String phoneNumber) {
     authRepositary.signInWithPhone(context, phoneNumber);
