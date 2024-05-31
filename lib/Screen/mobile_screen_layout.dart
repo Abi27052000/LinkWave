@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:linkwave/Widgets/contacts_list.dart';
+import 'package:linkwave/features/select_contacts/screens/select_contacts_screen.dart';
 
 class MobileScreenLayout extends StatelessWidget {
   const MobileScreenLayout({super.key});
@@ -12,41 +12,42 @@ class MobileScreenLayout extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blue,
-          title:const Text(
+          title: const Text(
             'LINK-WAVE',
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold
-            ),
-
-
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
           actions: [
-            IconButton(onPressed: () {}, icon:const Icon(Icons.search)),
-            IconButton(onPressed: () {}, icon:const Icon(Icons.more_vert))
-
+            IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
           ],
-          bottom:const TabBar(
-            labelColor: Colors.black,
-            indicatorWeight: 5,
-            labelStyle: TextStyle(
-              fontWeight: FontWeight.bold
-            ),
-            tabs: [
-              Tab(text: 'CHATS',),
-              Tab(text: 'STORIES',),
-              Tab(text: 'CALLS',),
-              Tab(text: 'POSTS',),
-            ]
-            ),
+          bottom: const TabBar(
+              labelColor: Colors.black,
+              indicatorWeight: 5,
+              labelStyle: TextStyle(fontWeight: FontWeight.bold),
+              tabs: [
+                Tab(
+                  text: 'CHATS',
+                ),
+                Tab(
+                  text: 'STORIES',
+                ),
+                Tab(
+                  text: 'CALLS',
+                ),
+                Tab(
+                  text: 'POSTS',
+                ),
+              ]),
         ),
-        body:const ContactsList(),
+        body: const ContactsList(),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, SelectContactScreen.routeName);
+          },
           backgroundColor: Colors.blue,
           child: Icon(Icons.comment),
-          ),
+        ),
       ),
-      );
+    );
   }
 }

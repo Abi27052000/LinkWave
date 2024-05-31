@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:linkwave/Screen/mobile_chat_screen.dart';
 import 'package:linkwave/common/widgets/error.dart';
 import 'package:linkwave/features/auth/screens/login_screen.dart';
 import 'package:linkwave/features/auth/screens/otp_screen.dart';
 import 'package:linkwave/features/auth/screens/user_information_screen.dart';
+import 'package:linkwave/features/select_contacts/screens/select_contacts_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -22,6 +24,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case UserInformationScreen.routeName:
       return MaterialPageRoute(
         builder: (context) => const UserInformationScreen(),
+      );
+    case SelectContactScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const SelectContactScreen(),
+      );
+
+    case MobileChatScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const MobileChatScreen(),
       );
 
     default:
