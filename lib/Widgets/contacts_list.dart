@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:linkwave/Screen/mobile_chat_screen.dart';
+import 'package:linkwave/features/chat/Screens/mobile_chat_screen.dart';
 
 import 'package:linkwave/info.dart';
 

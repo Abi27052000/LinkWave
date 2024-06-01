@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:linkwave/Screen/mobile_chat_screen.dart';
+import 'package:linkwave/features/chat/Screens/mobile_chat_screen.dart';
 import 'package:linkwave/common/utills/utills.dart';
 import 'package:linkwave/models/user_models.dart';
 

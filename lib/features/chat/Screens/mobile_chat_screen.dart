@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:linkwave/Widgets/chat_list.dart';
 import 'package:linkwave/common/widgets/loader.dart';
 import 'package:linkwave/features/auth/controller/auth_controller.dart';
+import 'package:linkwave/features/chat/widgets/bottom_chat_field.dart';
 import 'package:linkwave/models/user_models.dart';
 
 class MobileChatScreen extends ConsumerWidget {
@@ -62,48 +63,7 @@ class MobileChatScreen extends ConsumerWidget {
           const Expanded(
             child: ChatList(),
           ),
-          TextField(
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey,
-                prefixIcon: const Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                  ),
-                  child: Icon(
-                    Icons.emoji_emotions,
-                    color: Colors.black,
-                  ),
-                ),
-                suffixIcon: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Icon(
-                        Icons.camera_alt,
-                        color: Colors.black,
-                      ),
-                      Icon(
-                        Icons.attach_file,
-                        color: Colors.black,
-                      ),
-                      Icon(
-                        Icons.money,
-                        color: Colors.black,
-                      ),
-                    ],
-                  ),
-                ),
-                hintText: 'Enter the message.',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide:
-                      const BorderSide(width: 0, style: BorderStyle.none),
-                ),
-                contentPadding: const EdgeInsets.all(10)),
-          )
+          BottomChatField()
         ],
       ),
     );
