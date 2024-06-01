@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:linkwave/Widgets/chat_list.dart';
+import 'package:linkwave/common/widgets/loader.dart';
 import 'package:linkwave/features/auth/controller/auth_controller.dart';
 import 'package:linkwave/models/user_models.dart';
 
@@ -25,17 +26,20 @@ class MobileChatScreen extends ConsumerWidget {
         title: StreamBuilder<UserModel>(
             stream: ref.read(authControllerProvider).userDataById(uid),
             builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return Column(
-                  children: [
-                    Text(
-                      name,
-                    ),
-                    Text(snapshot.data!.isOnline ? 'online' : 'offline'),
-                  ],
-                );
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Loader();
               }
-              return Container();
+              return Column(
+                children: [
+                  Text(
+                    name,
+                  ),
+                  Text(
+                    snapshot.data!.isOnline ? 'online' : 'offline',
+                    style: const TextStyle(fontSize: 13),
+                  ),
+                ],
+              );
             }),
         centerTitle: false,
         actions: [
