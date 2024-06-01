@@ -1,19 +1,42 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:linkwave/Widgets/chat_list.dart';
-import 'package:linkwave/info.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MobileChatScreen extends StatelessWidget {
+import 'package:linkwave/Widgets/chat_list.dart';
+import 'package:linkwave/features/auth/controller/auth_controller.dart';
+import 'package:linkwave/models/user_models.dart';
+
+class MobileChatScreen extends ConsumerWidget {
   static const String routeName = '/mobile-chat-screen';
-  const MobileChatScreen({super.key});
+  final String name;
+  final String uid;
+
+  const MobileChatScreen({
+    Key? key,
+    required this.name,
+    required this.uid,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text(
-          info[0]['name'].toString(),
-        ),
+        title: StreamBuilder<UserModel>(
+            stream: ref.read(authControllerProvider).userDataById(uid),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Column(
+                  children: [
+                    Text(
+                      name,
+                    ),
+                    Text(snapshot.data!.isOnline ? 'online' : 'offline'),
+                  ],
+                );
+              }
+              return Container();
+            }),
         centerTitle: false,
         actions: [
           IconButton(
