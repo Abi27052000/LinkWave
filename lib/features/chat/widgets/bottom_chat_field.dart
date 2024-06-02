@@ -1,16 +1,33 @@
 import 'package:flutter/material.dart';
 
-class BottomChatField extends StatelessWidget {
+class BottomChatField extends StatefulWidget {
   const BottomChatField({
     super.key,
   });
 
   @override
+  State<BottomChatField> createState() => _BottomChatFieldState();
+}
+
+class _BottomChatFieldState extends State<BottomChatField> {
+  bool isShowSendButton = false;
+  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
-          child: TextField(
+          child: TextFormField(
+            onChanged: (val) {
+              if (val.isNotEmpty) {
+                setState(() {
+                  isShowSendButton = true;
+                });
+              } else {
+                setState(() {
+                  isShowSendButton = false;
+                });
+              }
+            },
             decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.grey,
@@ -74,7 +91,9 @@ class BottomChatField extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 5),
-          child: Icon(Icons.send),
+          child: Icon(
+            isShowSendButton ? Icons.send : Icons.mic,
+          ),
         )
       ],
     );
