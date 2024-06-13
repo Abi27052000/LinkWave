@@ -1,22 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:linkwave/features/chat/controller/chat_controllr.dart';
 
-class BottomChatField extends StatefulWidget {
+class BottomChatField extends ConsumerStatefulWidget {
+  final String receiverUserId;
   const BottomChatField({
     super.key,
+    required this.receiverUserId,
   });
 
   @override
-  State<BottomChatField> createState() => _BottomChatFieldState();
+  ConsumerState<BottomChatField> createState() => _BottomChatFieldState();
 }
 
-class _BottomChatFieldState extends State<BottomChatField> {
+class _BottomChatFieldState extends ConsumerState<BottomChatField> {
   bool isShowSendButton = false;
+
+  final TextEditingController _messageController = TextEditingController();
+
+  @override
+  void sendTextMessage() async {
+    if (isShowSendButton) {
+      ref.read(ChatControllerProvider).sendTextMessage(
+            context,
+            _messageController.text.trim(),
+            widget.receiverUserId,
+          );
+      setState(() {
+        _messageController.text = '';
+      });
+    }
+  }
+
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _messageController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: TextFormField(
+            controller: _messageController,
             onChanged: (val) {
               if (val.isNotEmpty) {
                 setState(() {
@@ -91,8 +119,11 @@ class _BottomChatFieldState extends State<BottomChatField> {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 5),
-          child: Icon(
-            isShowSendButton ? Icons.send : Icons.mic,
+          child: GestureDetector(
+            child: Icon(
+              isShowSendButton ? Icons.send : Icons.mic,
+            ),
+            onTap: sendTextMessage,
           ),
         )
       ],
