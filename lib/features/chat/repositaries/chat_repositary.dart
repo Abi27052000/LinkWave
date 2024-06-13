@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:linkwave/common/enums/message_enum.dart';
 import 'package:linkwave/common/utills/utills.dart';
+import 'package:linkwave/info.dart';
 import 'package:linkwave/models/chat_contact.dart';
 import 'package:linkwave/models/message.dart';
 import 'package:linkwave/models/user_models.dart';
@@ -19,6 +20,37 @@ class ChatRepositary {
   final FirebaseAuth auth;
 
   ChatRepositary({required this.firestore, required this.auth});
+
+  Stream<List<ChatContact>> getChatContacts() {
+    return firestore
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .collection('chats')
+        .snapshots()
+        .asyncMap((event) async {
+      List<ChatContact> contacts = [];
+      for (var document in event.docs) {
+        var chatContact = ChatContact.fromMap(document.data());
+        var userData = await firestore
+            .collection('users')
+            .doc(chatContact.contactId)
+            .get();
+
+        var user = UserModel.fromMap(userData.data()!);
+
+        contacts.add(
+          ChatContact(
+            name: user.name,
+            profilePic: user.profilePic,
+            contactId: chatContact.contactId,
+            timeSent: chatContact.timeSent,
+            lastMessage: chatContact.lastMessage,
+          ),
+        );
+      }
+      return contacts;
+    });
+  }
 
   void _saveDataToContactsSubcollection(
     UserModel senderUserData,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:linkwave/features/auth/controller/auth_controller.dart';
 import 'package:linkwave/features/chat/repositaries/chat_repositary.dart';
+import 'package:linkwave/models/chat_contact.dart';
 
 final ChatControllerProvider = Provider((ref) {
   final ChatRepositary = ref.watch(ChatRepositaryProvider);
@@ -18,6 +19,10 @@ class ChatController {
   final ProviderRef ref;
 
   ChatController({required this.chatRepositary, required this.ref});
+
+  Stream<List<ChatContact>> chatContacts() {
+    return chatRepositary.getChatContacts();
+  }
 
   void sendTextMessage(
       BuildContext context, String text, String receiverUserId) {
