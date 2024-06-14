@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:linkwave/Widgets/my_message_card.dart';
-import 'package:linkwave/Widgets/sender_message_card.dart';
+import 'package:linkwave/features/chat/widgets/my_message_card.dart';
+import 'package:linkwave/features/chat/widgets/sender_message_card.dart';
 import 'package:linkwave/features/chat/controller/chat_controllr.dart';
 import 'package:linkwave/models/message.dart';
 
@@ -56,11 +56,13 @@ class _ChatListState extends ConsumerState<ChatList> {
                 return MyMessageCard(
                   message: messageData.text,
                   date: timeSent,
+                  type: messageData.type,
                 );
               }
               return SenderMessageCard(
                 message: messageData.text,
                 date: timeSent,
+                type: messageData.type,
               );
             },
           );
