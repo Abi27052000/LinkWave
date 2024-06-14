@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:linkwave/common/enums/message_enum.dart';
+import 'package:linkwave/features/chat/widgets/video_player_item.dart';
 import 'package:linkwave/models/message.dart';
 
 class DisplayTextImageGIF extends StatelessWidget {
@@ -20,12 +21,16 @@ class DisplayTextImageGIF extends StatelessWidget {
     return type == MessageEnum.text
         ? Text(
             message,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
             ),
           )
-        : CachedNetworkImage(
-            imageUrl: message,
-          );
+        : type == MessageEnum.video
+            ? VideoPlayerItem(
+                videoUrl: message,
+              )
+            : CachedNetworkImage(
+                imageUrl: message,
+              );
   }
 }
