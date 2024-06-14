@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:linkwave/Widgets/chat_list.dart';
+import 'package:linkwave/features/chat/widgets/chat_list.dart';
 import 'package:linkwave/common/widgets/loader.dart';
 import 'package:linkwave/features/auth/controller/auth_controller.dart';
 import 'package:linkwave/features/chat/widgets/bottom_chat_field.dart';
@@ -60,8 +60,10 @@ class MobileChatScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          const Expanded(
-            child: ChatList(),
+          Expanded(
+            child: ChatList(
+              receiverUserId: uid,
+            ),
           ),
           BottomChatField(
             receiverUserId: uid,

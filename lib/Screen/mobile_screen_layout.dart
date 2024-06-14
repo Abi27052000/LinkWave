@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:linkwave/Widgets/contacts_list.dart';
+import 'package:linkwave/features/chat/widgets/contacts_list.dart';
 import 'package:linkwave/features/select_contacts/screens/select_contacts_screen.dart';
 
 class MobileScreenLayout extends StatelessWidget {

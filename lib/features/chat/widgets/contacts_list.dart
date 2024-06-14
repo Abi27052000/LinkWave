@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:linkwave/features/chat/Screens/mobile_chat_screen.dart';
 import 'package:linkwave/features/chat/controller/chat_controllr.dart';
 
-import 'package:linkwave/info.dart';
 import 'package:linkwave/models/chat_contact.dart';
 
 class ContactsList extends ConsumerWidget {

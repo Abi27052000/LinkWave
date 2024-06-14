@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:linkwave/common/enums/message_enum.dart';
 import 'package:linkwave/common/utills/utills.dart';
-import 'package:linkwave/info.dart';
+
 import 'package:linkwave/models/chat_contact.dart';
 import 'package:linkwave/models/message.dart';
 import 'package:linkwave/models/user_models.dart';
@@ -49,6 +49,24 @@ class ChatRepositary {
         );
       }
       return contacts;
+    });
+  }
+
+  Stream<List<Message>> getChatStream(String receiverUserId) {
+    return firestore
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .collection('chats')
+        .doc(receiverUserId)
+        .collection('messages')
+        .orderBy('timeSent')
+        .snapshots()
+        .map((event) {
+      List<Message> messages = [];
+      for (var document in event.docs) {
+        messages.add(Message.fromMap(document.data()));
+      }
+      return messages;
     });
   }
 
