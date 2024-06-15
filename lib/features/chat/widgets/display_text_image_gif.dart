@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:linkwave/common/enums/message_enum.dart';
 import 'package:linkwave/features/chat/widgets/video_player_item.dart';
-import 'package:linkwave/models/message.dart';
 
 class DisplayTextImageGIF extends StatelessWidget {
   final String message;
