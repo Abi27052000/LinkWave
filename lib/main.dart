@@ -5,12 +5,11 @@ import 'package:linkwave/Screen/mobile_screen_layout.dart';
 import 'package:linkwave/common/widgets/error.dart';
 import 'package:linkwave/common/widgets/loader.dart';
 import 'package:linkwave/features/auth/controller/auth_controller.dart';
-//import 'package:linkwave/Screen/mobile_screen_layout.dart';
-//import 'package:linkwave/Screen/web_screen_layout.dart';
+
 import 'package:linkwave/features/landing/my_landing_screen.dart';
-//import 'package:linkwave/features/landing/screens/landing_screen.dart';
+
 import 'package:linkwave/firebase_options.dart';
-//import 'package:linkwave/responsive/responsive_layout.dart';
+
 import 'package:linkwave/router.dart';
 
 void main() async {
