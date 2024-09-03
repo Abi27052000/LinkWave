@@ -70,8 +70,8 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     if (gif != null) {
       ref.read(ChatControllerProvider).sendGifMessage(
             context,
-            // gif.url,
-            gif.url?.toString() ?? '',
+            gif.url.toString(),
+            // gif.url?.toString() ?? '',
             widget.receiverUserId,
           );
     }

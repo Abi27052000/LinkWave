@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:linkwave/common/utills/utills.dart';
 import 'package:linkwave/features/auth/controller/auth_controller.dart';
 import 'package:linkwave/features/chat/widgets/contacts_list.dart';
 import 'package:linkwave/features/select_contacts/screens/select_contacts_screen.dart';
+import 'package:linkwave/features/status/screens/confirm_status_screen.dart';
+import 'package:linkwave/features/status/screens/status_contact_screen.dart';
 
 class MobileScreenLayout extends ConsumerStatefulWidget {
   const MobileScreenLayout({super.key});
@@ -12,11 +17,12 @@ class MobileScreenLayout extends ConsumerStatefulWidget {
 }
 
 class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
-    with WidgetsBindingObserver {
+    with WidgetsBindingObserver, TickerProviderStateMixin {
+  late TabController tabBarController;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    tabBarController = TabController(length: 4, vsync: this);
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -59,11 +65,12 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
             IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
             IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
           ],
-          bottom: const TabBar(
+          bottom: TabBar(
+              controller: tabBarController,
               labelColor: Colors.black,
               indicatorWeight: 5,
               labelStyle: TextStyle(fontWeight: FontWeight.bold),
-              tabs: [
+              tabs: const [
                 Tab(
                   text: 'CHATS',
                 ),
@@ -78,10 +85,29 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
                 ),
               ]),
         ),
-        body: const ContactsList(),
+        body: TabBarView(
+          controller: tabBarController,
+          children: const [
+            ContactsList(),
+            StatusContactScreen(),
+            Text("Calls"),
+            Text("Posts"),
+          ],
+        ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, SelectContactScreen.routeName);
+          onPressed: () async {
+            if (tabBarController.index == 0) {
+              Navigator.pushNamed(context, SelectContactScreen.routeName);
+            } else {
+              File? pickedImage = await pickImageFromGallery(context);
+              if (pickedImage != null) {
+                Navigator.pushNamed(
+                  context,
+                  ConfirmStatusScreen.routeName,
+                  arguments: pickedImage,
+                );
+              }
+            }
           },
           backgroundColor: Colors.blue,
           child: Icon(Icons.comment),
