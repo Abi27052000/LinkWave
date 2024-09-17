@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:linkwave/common/widgets/loader.dart';
-
 import 'package:linkwave/models/status_model.dart';
 import 'package:story_view/controller/story_controller.dart';
 import 'package:story_view/utils.dart';
@@ -22,21 +21,19 @@ class StatusScreen extends StatefulWidget {
 class _StatusScreenState extends State<StatusScreen> {
   StoryController controller = StoryController();
   List<StoryItem> storyItems = [];
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     initStoryPageItems();
   }
 
   void initStoryPageItems() {
     for (int i = 0; i < widget.status.photoUrl.length; i++) {
-      storyItems.add(
-        StoryItem.pageImage(
-          url: widget.status.photoUrl[i],
-          controller: controller,
-        ),
-      );
+      storyItems.add(StoryItem.pageImage(
+        url: widget.status.photoUrl[i],
+        controller: controller,
+      ));
     }
   }
 

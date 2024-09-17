@@ -9,25 +9,24 @@ import 'package:linkwave/features/status/repositary/status_repositary.dart';
 import 'package:linkwave/models/status_model.dart';
 
 final statusControllerProvider = Provider((ref) {
-  final statusRepositary = ref.read(StatusRepositaryProvider);
+  final statusRepository = ref.read(statusRepositoryProvider);
   return StatusController(
-    statusRepositary: statusRepositary,
+    statusRepository: statusRepository,
     ref: ref,
   );
 });
 
 class StatusController {
-  final StatusRepositary statusRepositary;
+  final StatusRepository statusRepository;
   final ProviderRef ref;
-
   StatusController({
-    required this.statusRepositary,
+    required this.statusRepository,
     required this.ref,
   });
 
   void addStatus(File file, BuildContext context) {
     ref.watch(userDataAuthProvider).whenData((value) {
-      statusRepositary.uploadStatus(
+      statusRepository.uploadStatus(
         username: value!.name,
         profilePic: value.profilePic,
         phoneNumber: value.phoneNumber,
@@ -38,7 +37,7 @@ class StatusController {
   }
 
   Future<List<Status>> getStatus(BuildContext context) async {
-    List<Status> statuses = await statusRepositary.getStatus(context);
+    List<Status> statuses = await statusRepository.getStatus(context);
     return statuses;
   }
 }

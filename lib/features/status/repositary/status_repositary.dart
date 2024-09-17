@@ -13,20 +13,19 @@ import 'package:linkwave/models/status_model.dart';
 import 'package:linkwave/models/user_models.dart';
 import 'package:uuid/uuid.dart';
 
-final StatusRepositaryProvider = Provider(
-  (ref) => StatusRepositary(
+final statusRepositoryProvider = Provider(
+  (ref) => StatusRepository(
     firestore: FirebaseFirestore.instance,
     auth: FirebaseAuth.instance,
     ref: ref,
   ),
 );
 
-class StatusRepositary {
+class StatusRepository {
   final FirebaseFirestore firestore;
   final FirebaseAuth auth;
   final ProviderRef ref;
-
-  StatusRepositary({
+  StatusRepository({
     required this.firestore,
     required this.auth,
     required this.ref,
@@ -42,14 +41,13 @@ class StatusRepositary {
     try {
       var statusId = const Uuid().v1();
       String uid = auth.currentUser!.uid;
-      String imageUrl = await ref
+      String imageurl = await ref
           .read(commonFirebaseStorageRepositaryProvider)
           .storeFileToFirebase(
             '/status/$statusId$uid',
             statusImage,
           );
       List<Contact> contacts = [];
-
       if (await FlutterContacts.requestPermission()) {
         contacts = await FlutterContacts.getContacts(withProperties: true);
       }
@@ -61,7 +59,10 @@ class StatusRepositary {
             .collection('users')
             .where(
               'phoneNumber',
-              isEqualTo: contacts[i].phones[0].number.replaceAll(' ', ''),
+              isEqualTo: contacts[i].phones[0].number.replaceAll(
+                    ' ',
+                    '',
+                  ),
             )
             .get();
 
@@ -83,16 +84,16 @@ class StatusRepositary {
       if (statusesSnapshot.docs.isNotEmpty) {
         Status status = Status.fromMap(statusesSnapshot.docs[0].data());
         statusImageUrls = status.photoUrl;
-        statusImageUrls.add(imageUrl);
+        statusImageUrls.add(imageurl);
         await firestore
             .collection('status')
             .doc(statusesSnapshot.docs[0].id)
-            .update(
-          {'photoUrl': statusImageUrls},
-        );
+            .update({
+          'photoUrl': statusImageUrls,
+        });
         return;
       } else {
-        statusImageUrls = [imageUrl];
+        statusImageUrls = [imageurl];
       }
 
       Status status = Status(
@@ -106,9 +107,7 @@ class StatusRepositary {
         whoCanSee: uidWhoCanSee,
       );
 
-      await firestore.collection('status').doc(statusId).set(
-            status.toMap(),
-          );
+      await firestore.collection('status').doc(statusId).set(status.toMap());
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }
@@ -126,7 +125,10 @@ class StatusRepositary {
             .collection('status')
             .where(
               'phoneNumber',
-              isEqualTo: contacts[i].phones[0].number.replaceAll(' ', ''),
+              isEqualTo: contacts[i].phones[0].number.replaceAll(
+                    ' ',
+                    '',
+                  ),
             )
             .where(
               'createdAt',
@@ -135,7 +137,6 @@ class StatusRepositary {
                   .millisecondsSinceEpoch,
             )
             .get();
-
         for (var tempData in statusesSnapshot.docs) {
           Status tempStatus = Status.fromMap(tempData.data());
           if (tempStatus.whoCanSee.contains(auth.currentUser!.uid)) {

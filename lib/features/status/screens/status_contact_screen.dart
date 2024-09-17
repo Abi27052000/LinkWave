@@ -5,8 +5,8 @@ import 'package:linkwave/features/status/controller/status_controller.dart';
 import 'package:linkwave/features/status/screens/status_screen.dart';
 import 'package:linkwave/models/status_model.dart';
 
-class StatusContactScreen extends ConsumerWidget {
-  const StatusContactScreen({super.key});
+class StatusContactsScreen extends ConsumerWidget {
+  const StatusContactsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,26 +24,28 @@ class StatusContactScreen extends ConsumerWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, StatusScreen.routeName,
-                        arguments: statusData);
+                    Navigator.pushNamed(
+                      context,
+                      StatusScreen.routeName,
+                      arguments: statusData,
+                    );
                   },
-                  child: ListTile(
-                    title: Text(
-                      statusData.username,
-                      style: const TextStyle(fontSize: 18),
-                    ),
-                    leading: CircleAvatar(
-                      radius: 30,
-                      backgroundImage: NetworkImage(
-                        statusData.profilePic,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: ListTile(
+                      title: Text(
+                        statusData.username,
+                      ),
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                          statusData.profilePic,
+                        ),
+                        radius: 30,
                       ),
                     ),
                   ),
                 ),
-                const Divider(
-                  color: Colors.grey,
-                  indent: 85,
-                )
+                const Divider(color: Colors.grey, indent: 85),
               ],
             );
           },

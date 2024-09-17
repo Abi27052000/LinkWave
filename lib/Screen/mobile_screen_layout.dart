@@ -89,7 +89,7 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
           controller: tabBarController,
           children: const [
             ContactsList(),
-            StatusContactScreen(),
+            StatusContactsScreen(),
             Text("Calls"),
             Text("Posts"),
           ],
@@ -110,7 +110,7 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
             }
           },
           backgroundColor: Colors.blue,
-          child: Icon(Icons.comment),
+          child: Icon(Icons.add),
         ),
       ),
     );
