@@ -26,11 +26,11 @@ class SelectContactScreen extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.search),
+            icon: const Icon(Icons.person),
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.more_vert),
+            icon: const Icon(Icons.exit_to_app),
           )
         ],
       ),
