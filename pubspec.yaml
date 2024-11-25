@@ -48,7 +48,6 @@ dependencies:
   cached_video_player: ^2.0.4
   emoji_picker_flutter: ^2.1.1
   giphy_picker: ^3.0.2
-  # firebase_app_check: ^0.2.2+7
   story_view: ^0.16.0
   flutter_sound: ^9.11.2
   path_provider: ^2.1.4
@@ -84,6 +83,8 @@ flutter:
     - assets/kk.png
     - assets/mm.jpg
     - assets/new.jpg
+    - assets/abi.jpg
+    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

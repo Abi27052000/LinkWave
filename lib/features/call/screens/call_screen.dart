@@ -24,7 +24,7 @@ class CallScreen extends ConsumerStatefulWidget {
 class _CallScreenState extends ConsumerState<CallScreen> {
   AgoraClient? client;
   String baseUrl =
-      "007eJxTYLiZaHy4ftFao0kTHjklLNrF805xYusrHtkI/36X32cWJ71QYEhOskwxM042tkhJNDNJtjCwMEqyMDIwNTE1SDJLSkmx7DzwKq0hkJHhe7QjIyMDBIL4HAw+mXnZ4YllqQwMAEJdIqU=";
+      "007eJxTYCiemh644Gv4BLHUxPs34+IuzRFmCNloeunVoVlXHt8O3tqgwJCcZJliZpxsbJGSaGaSbGFgYZRkYWRgamJqkGSWlJJieWOVc3pDICODqogiEyMDBIL4HAw+mXnZ4YllqQwMAEs+IdU=";
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _CallScreenState extends ConsumerState<CallScreen> {
         appId: AgoraConfig.appId,
         channelName: "LinkWave",
         tempToken:
-            "007eJxTYLiZaHy4ftFao0kTHjklLNrF805xYusrHtkI/36X32cWJ71QYEhOskwxM042tkhJNDNJtjCwMEqyMDIwNTE1SDJLSkmx7DzwKq0hkJHhe7QjIyMDBIL4HAw+mXnZ4YllqQwMAEJdIqU=",
+            "007eJxTYCiemh644Gv4BLHUxPs34+IuzRFmCNloeunVoVlXHt8O3tqgwJCcZJliZpxsbJGSaGaSbGFgYZRkYWRgamJqkGSWlJJieWOVc3pDICODqogiEyMDBIL4HAw+mXnZ4YllqQwMAEs+IdU=",
       ),
     );
     initAgora();

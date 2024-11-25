@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:linkwave/common/utills/utills.dart';
 import 'package:linkwave/features/auth/controller/auth_controller.dart';
 import 'package:linkwave/features/chat/widgets/contacts_list.dart';
+import 'package:linkwave/features/post/screens/post_screen.dart';
 import 'package:linkwave/features/select_contacts/screens/select_contacts_screen.dart';
 import 'package:linkwave/features/status/screens/confirm_status_screen.dart';
 import 'package:linkwave/features/status/screens/status_contact_screen.dart';
@@ -78,7 +79,7 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
                   text: 'STORIES',
                 ),
                 Tab(
-                  text: 'CALLS',
+                  text: 'USER PROFILE',
                 ),
                 Tab(
                   text: 'POSTS',
@@ -90,8 +91,123 @@ class _MobileScreenLayoutState extends ConsumerState<MobileScreenLayout>
           children: const [
             ContactsList(),
             StatusContactsScreen(),
-            Text("Calls"),
-            Text("Posts"),
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          "Profile Picture",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        CircleAvatar(
+                          radius: 60,
+                          backgroundImage: AssetImage("assets/abi.jpg"),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 30),
+
+                  // Username Section
+                  Card(
+                    elevation: 3,
+                    child: Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Username",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            "Abi",
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 20),
+
+                  // Phone Number Section
+                  Card(
+                    elevation: 3,
+                    child: Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Phone Number",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            "+94 0701465243",
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 20),
+
+                  // Date Created Section
+                  Card(
+                    elevation: 3,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Date Created",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            "23-05-2024",
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            PostScreen(),
           ],
         ),
         floatingActionButton: FloatingActionButton(

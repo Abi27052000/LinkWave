@@ -1,6 +1,7 @@
 import 'dart:io';
 
 //import 'package:enough_giphy_flutter/enough_giphy_flutter.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:giphy_picker/giphy_picker.dart';
 import 'package:image_picker/image_picker.dart';
@@ -60,3 +61,16 @@ Future<GiphyGif?> pickGIF(BuildContext context) async {
   }
   return gif;
 }
+
+Future<String> uploadImageToFirebase(XFile imageFile) async {
+  String fileName = imageFile.name;
+  Reference ref = FirebaseStorage.instance.ref().child('posts/$fileName');
+  UploadTask uploadTask = ref.putFile(File(imageFile.path));
+  TaskSnapshot taskSnapshot = await uploadTask;
+  String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+  return downloadUrl;
+}
+
+// void showSnackBar({required BuildContext context, required String content}) {
+//   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(content)));
+// }
